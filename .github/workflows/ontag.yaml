@@ -73,7 +73,7 @@ jobs:
     # Create secret
     - name: Create Secret
       run: |-
-        kubectl create secret hqs-email-service-secret --from-literal=EMAIL_PASSOWRD="${{ env.EMAIL_PASSOWRD }}"
+        kubectl create secret generic hqs-email-service-secret --from-literal=EMAIL_PASSOWRD="${{ env.EMAIL_PASSOWRD }}"
       working-directory: k8
 
     # Deploy the Docker image to the GKE cluster
