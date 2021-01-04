@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: hqs-email-service
+spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: hqs-email-service
+    template:
+        metadata:
+          name: hqs-email-service
+          labels:
+            app: hqs-email-service
+        spec:
+          containers:
+            - name: hqs-email-service
+              image: gcr.io/softcorp-hqs/hqs/hqs_email_service:v0.0.4
+              imagePullPolicy: Always
+              volumeMounts: 
+              - name: image-storage
+                mountPath: ./app/tmp
+              ports:
+                - containerPort: 9000
+              env: 
+              - name: "EMAIL_FROM"
+                value: "oscar@softcorp.io"
+              - name: "SMPT_HOST"
+                value: "smtp.gmail.com"
+              - name: "SMPT_PORT"
+                value: "587"
+              envFrom:
+              - secretRef:
+                  name: hqs-email-service-secret
+          volumes:
+          - name: image-storage
+            emptyDir: {}
