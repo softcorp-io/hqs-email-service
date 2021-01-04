@@ -15,7 +15,7 @@ spec:
         spec:
           containers:
             - name: hqs-email-service
-              image: gcr.io/softcorp-hqs/hqs-email-service:v0.0.5
+              image: gcr.io/softcorp-hqs/hqs-email-service:v0.0.6
               imagePullPolicy: Always
               volumeMounts: 
               - name: image-storage
@@ -25,7 +25,7 @@ spec:
               env: 
               - name: "EMAIL_FROM"
                 value: "oscar@softcorp.io"
-              -name: "SERVICE_PORT"
+              - name: "SERVICE_PORT"
                 value: "9000"
               - name: "SMPT_HOST"
                 value: "smtp.gmail.com"
