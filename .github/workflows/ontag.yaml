@@ -7,18 +7,12 @@ on:
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+  EMAIL_PASSOWRD: ${{ secrets.EMAIL_PASSOWRD }}
   GKE_CLUSTER: softcorp-hqs-cluster
   GKE_ZONE: europe-west1-b 
-  DEPLOYMENT_NAME: hqs-user-service
+  DEPLOYMENT_NAME: hqs-email-service
   DEPLOYMENT_FILE: deployment.yaml
-  IMAGE: hqs-user-service
-  USER_CRYPTO_JWT_KEY: ${{ secrets.USER_CRYPTO_JWT_KEY }}
-  RESET_PASSWORD_CRYPTO_JWT_KEY: ${{ secrets.RESET_PASSWORD_CRYPTO_JWT_KEY }}
-  MONGO_HOST: ${{ secrets.MONGO_HOST }}
-  MONGO_USER: ${{ secrets.MONGO_USER }}
-  MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
-  SPACES_KEY: ${{ secrets.SPACES_KEY }}
-  SPACES_SECRET: ${{ secrets.SPACES_SECRET }}
+  IMAGE: hqs-email-service
 
 jobs:
   setup-build-publish-deploy:
@@ -36,14 +30,6 @@ jobs:
       run: |
         echo $RELEASE_VERSION
         echo ${{ env.RELEASE_VERSION }}
-    
-    - name: Go Test Handler
-      run: go test ./testdev/handlertest/... -v
-      working-directory: app
-
-    - name: Go Test Service
-      run: go test ./testdev/servicetest/... -v
-      working-directory: app
 
     # Setup gcloud CLI
     - uses: google-github-actions/setup-gcloud@v0.2.0
@@ -80,14 +66,14 @@ jobs:
     # Delete secret so we can create again
     - name: Delete Secret
       run: |-
-        kubectl delete secret hqs-user-service-secret
+        kubectl delete secret hqs-email-service-secret
       continue-on-error: true
       working-directory: k8
 
     # Create secret
     - name: Create Secret
       run: |-
-        kubectl create secret hqs-user-service-secret --from-literal=USER_CRYPTO_JWT_KEY="${{ env.USER_CRYPTO_JWT_KEY }}" --from-literal=MONGO_HOST="${{ env.MONGO_HOST }}" --from-literal=MONGO_USER="${{ env.MONGO_USER }}" --from-literal=MONGO_PASSWORD="${{ env.MONGO_PASSWORD }}" --from-literal=SPACES_KEY="${{ env.SPACES_KEY }}" --from-literal=SPACES_SECRET="${{ env.SPACES_SECRET }}" --from-literal=RESET_PASSWORD_CRYPTO_JWT_KEY="${{ env.RESET_PASSWORD_CRYPTO_JWT_KEY }}"
+        kubectl create secret hqs-email-service-secret --from-literal=EMAIL_PASSOWRD="${{ env.EMAIL_PASSOWRD }}"
       working-directory: k8
 
     # Deploy the Docker image to the GKE cluster
