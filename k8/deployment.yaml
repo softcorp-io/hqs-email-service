@@ -31,7 +31,7 @@ spec:
                 value: "587"
               - name: "RESET_PASSWORD_URL"
                 value: "http://hqs.softcorp.io/resetpassword/"
-              -value: "SIGNUP_URL"
+              - name: "SIGNUP_URL"
                 value: "http://hqs.softcorp.io/signup/"
               envFrom:
               - secretRef:
