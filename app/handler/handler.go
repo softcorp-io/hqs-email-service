@@ -3,7 +3,9 @@ package handler
 import (
 	"bytes"
 	"context"
+	"errors"
 	"fmt"
+	"os"
 	"text/template"
 
 	email "github.com/softcorp-io/hqs-email-service/email"
@@ -42,12 +44,20 @@ func (s *Handler) SendResetPasswordEmail(ctx context.Context, email *proto.Reset
 	mimeHeaders := "MIME-version: 1.0;\nContent-Type: text/html; charset=\"UTF-8\";\n\n"
 	body.Write([]byte(fmt.Sprintf("Subject: Hqs Reset Password Request \n%s\n\n", mimeHeaders)))
 
+	// get base link
+	resetBaseURL, ok := os.LookupEnv("RESET_PASSWORD_URL")
+	if !ok {
+		s.zapLog.Error("Could not get RESET_PASSWORD_URL")
+		return nil, errors.New("Could not get RESET_PASSWORD_URL")
+	}
+	link := resetBaseURL + email.Token
+
 	t.Execute(&body, struct {
-		Name  string
-		Token string
+		Name string
+		Link string
 	}{
-		Name:  email.Name,
-		Token: email.Token,
+		Name: email.Name,
+		Link: link,
 	})
 
 	// Sending email.
