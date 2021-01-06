@@ -15,7 +15,7 @@ spec:
         spec:
           containers:
             - name: hqs-email-service
-              image: gcr.io/softcorp-hqs/hqs-email-service:v0.0.9
+              image: gcr.io/softcorp-hqs/hqs-email-service:v0.0.10
               imagePullPolicy: Always
               volumeMounts: 
               - name: image-storage
