@@ -15,7 +15,7 @@ spec:
         spec:
           containers:
             - name: hqs-email-service
-              image: gcr.io/softcorp-hqs/hqs-email-service:v0.0.10
+              image: gcr.io/softcorp-hqs/hqs-email-service:v0.0.11
               imagePullPolicy: Always
               volumeMounts: 
               - name: image-storage
@@ -32,9 +32,9 @@ spec:
               - name: "SMPT_PORT"
                 value: "587"
               - name: "RESET_PASSWORD_URL"
-                value: "http://hqs.softcorp.io/resetpassword/"
+                value: "http://hqs.softcorp.io/#/resetpassword/"
               - name: "SIGNUP_URL"
-                value: "http://hqs.softcorp.io/signup/"
+                value: "http://hqs.softcorp.io/#/signup/"
               envFrom:
               - secretRef:
                   name: hqs-email-service-secret
