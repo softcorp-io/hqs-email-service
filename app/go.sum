@@ -53,6 +53,8 @@ github.com/softcorp-io/hqs_proto v0.0.19 h1:tTOOUuOFiUa0YrI3nZRojVWPPVyjygnZtF58
 github.com/softcorp-io/hqs_proto v0.0.19/go.mod h1:Qu8eVzq7okeCaNnznjnSXvgOHajXU3h+RY4ETc6+ME8=
 github.com/softcorp-io/hqs_proto v0.0.20 h1:Va72N4VPLngrZQ1mmh839OIYPubiLLzhPsBxDUjFZaA=
 github.com/softcorp-io/hqs_proto v0.0.20/go.mod h1:Qu8eVzq7okeCaNnznjnSXvgOHajXU3h+RY4ETc6+ME8=
+github.com/softcorp-io/hqs_proto v0.0.41 h1:wEC44zc5FGnYFttW6IPj5ZfNouktbuBwRTEcZkqjD7I=
+github.com/softcorp-io/hqs_proto v0.0.41/go.mod h1:Qu8eVzq7okeCaNnznjnSXvgOHajXU3h+RY4ETc6+ME8=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/testify v1.3.0/go.mod h1:M5WIy9Dh21IEIfnGCwXGc5bZfKNJtfHm1UVUgZn+9EI=
 github.com/stretchr/testify v1.4.0/go.mod h1:j7eGeouHqKxXV5pUuKE4zz7dFj8WfuZ+81PSLYec5m4=
